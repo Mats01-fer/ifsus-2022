@@ -23,6 +23,12 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'complaints', views.ComplaintViewSet)
+router.register(r'teams', views.TeamViewSet)
+router.register(r'drivers', views.DriverViewSet)
+router.register(r'pointsupdates', views.PointsUpdateViewSet)
+router.register(r'races', views.RaceViewSet)
 
 
 # tweet_router = routers.NestedSimpleRouter(

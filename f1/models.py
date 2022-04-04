@@ -37,3 +37,13 @@ class PointsUpdate(models.Model):
         Driver, on_delete=models.CASCADE, related_name='point_updates')
     reace = models.ForeignKey(
         Race, on_delete=models.CASCADE, related_name='point_updates')
+
+
+class Complaint(models.Model):
+    id = models.AutoField(primary_key=True)
+    descirption = models.CharField(max_length=1140)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='complaints')
+    status = models.CharField(max_length=140)
+    resolved = models.BooleanField(default=False)

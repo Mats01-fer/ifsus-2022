@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers, viewsets
 from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer
+
+from f1.models import Complaint, Driver, PointsUpdate, Race, Team
+from .serializers import ComplaintSerializer, DriverSerializer, PointsUpdateSerializer, RaceSerializer, TeamSerializer, UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -20,6 +22,34 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+
+class TeamViewSet(viewsets.ModelViewSet):
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+class DriverViewSet(viewsets.ModelViewSet):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    
+class PointsUpdateViewSet(viewsets.ModelViewSet):
+    queryset = PointsUpdate.objects.all()
+    serializer_class = PointsUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+
+class ComplaintViewSet(viewsets.ModelViewSet):
+    queryset = Complaint.objects.all()
+    serializer_class = ComplaintSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+class RaceViewSet(viewsets.ModelViewSet):
+    queryset = Race.objects.all()
+    serializer_class = RaceSerializer
     permission_classes = [permissions.IsAuthenticated]
     
     
