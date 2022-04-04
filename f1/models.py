@@ -8,6 +8,9 @@ class Team(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     points = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return self.name
 
 
 class Driver(models.Model):
@@ -18,6 +21,8 @@ class Driver(models.Model):
         Team, on_delete=models.CASCADE, related_name='drivers')
     points = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"{self.number} {self.name} {self.last_name}"
 
 class Race(models.Model):
     id = models.AutoField(primary_key=True)
@@ -25,6 +30,9 @@ class Race(models.Model):
     location = models.CharField(max_length=140)
     date = models.DateField()
     completed = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.name} {self.location} {self.date}"
 
 
 class PointsUpdate(models.Model):
@@ -37,6 +45,7 @@ class PointsUpdate(models.Model):
         Driver, on_delete=models.CASCADE, related_name='point_updates')
     reace = models.ForeignKey(
         Race, on_delete=models.CASCADE, related_name='point_updates')
+    
 
 
 class Complaint(models.Model):
@@ -47,3 +56,7 @@ class Complaint(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='complaints')
     status = models.CharField(max_length=140)
     resolved = models.BooleanField(default=False)
+    
+    
+    def __str__(self):
+        return f"{self.team}: {self.descirption} {self.status} {self.resolved}"
