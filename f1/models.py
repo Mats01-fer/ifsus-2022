@@ -8,6 +8,7 @@ class Team(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     points = models.IntegerField(default=0)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return self.name
@@ -20,6 +21,8 @@ class Driver(models.Model):
     team = models.ForeignKey(
         Team, on_delete=models.CASCADE, related_name='drivers')
     points = models.IntegerField(default=0)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    
 
     def __str__(self):
         return f"{self.number} {self.name} {self.last_name}"
@@ -45,6 +48,8 @@ class PointsUpdate(models.Model):
         Driver, on_delete=models.CASCADE, related_name='point_updates')
     reace = models.ForeignKey(
         Race, on_delete=models.CASCADE, related_name='point_updates')
+    FIA_officer =  models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+   
     
 
 

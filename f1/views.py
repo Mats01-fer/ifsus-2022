@@ -7,6 +7,20 @@ from .serializers import ComplaintSerializer, DriverSerializer, PointsUpdateSeri
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+class IsFIAPermission(permissions.BasePermission):
+    """
+    Only FIA can assing points
+    """
+
+    def has_permission(self, request, view):
+        # Read permissions are allowed to any request,
+        # so we'll always allow GET, HEAD or OPTIONS requests.
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        # user must be in FIA group
+        return request.user.groups.filter(name='FIA').exists()
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -39,7 +53,7 @@ class DriverViewSet(viewsets.ModelViewSet):
 class PointsUpdateViewSet(viewsets.ModelViewSet):
     queryset = PointsUpdate.objects.all()
     serializer_class = PointsUpdateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsFIAPermission]
     
 
 class ComplaintViewSet(viewsets.ModelViewSet):
