@@ -1,0 +1,16 @@
+:root {
+    --color-primary: #a8071a;
+    --color-secondary: #fafafa;
+    --color-primary-text: white;
+    --color-secondary-text:black;
+    --color-highlight: #a8071a;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-primary-text);
+}
