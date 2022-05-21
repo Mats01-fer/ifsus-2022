@@ -17,6 +17,17 @@
   <div>
     {{form}}
   </div>
+  <form method="post">
+    {{ formset.management_form }}
+    {% for form in formset %}
+    <ul>
+      {{form}}
+      {% if formset.can_delete %}
+      <li>{{ form.DELETE }}</li>
+      {% endif %}
+    </ul>
+    {% endfor %}
+  </form>
 </body>
 
 </html>

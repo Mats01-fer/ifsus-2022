@@ -12,9 +12,14 @@ from django.shortcuts import render
 
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.detail import DetailView
+
 from .models import Team
-from django.forms import ModelForm
-from .forms import TeamForm
+from django.forms import ModelForm, modelformset_factory
+from .forms import TeamForm, DriverForm
+
+
+
 class TeamCreateView(CreateView):
     model = Team
     fields = ['name']
@@ -29,11 +34,14 @@ class TeamDeleteView(DeleteView):
 
 class TeamView(View):
     template_name = 'team_form.html'
-    
     form = TeamForm()
+    DriverFormSet = modelformset_factory(Driver, form=DriverForm, extra=1)
 
-    def get(self, request, *args, **kwargs):
-        return render(request,template_name=self.template_name, context={'title': "test", "form": self.form})
+    def get(self, request, id, *args, **kwargs):
+        queryset = Driver.objects.filter(team=id)
+        
+        formset = self.DriverFormSet(queryset=queryset)
+        return render(request,template_name=self.template_name, context={'title': "test", "form": self.form, "formset": formset})
     
 
 class IsFIAPermission(permissions.BasePermission):
@@ -130,3 +138,20 @@ class GetUserView(APIView):
             'uid': str(request.user.id),
         }
         return Response(content)
+    
+    
+    
+class TeamsView(View):
+    
+    def get(self, request, *args, **kwargs):
+        teams = Team.objects.all()
+        return render(request, 'teams.html', context={'teams': teams})
+    
+
+class TeamDetailView(DetailView):
+  
+    model = Team
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

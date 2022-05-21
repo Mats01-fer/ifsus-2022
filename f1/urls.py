@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework_nested import routers
 # from rest_framework import routers
 from rest_framework.authtoken import views as token_views
@@ -45,11 +45,11 @@ app_name = ''
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
     # path('', include(tweet_router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', token_views.obtain_auth_token),
     path('get-user/', views.GetUserView.as_view()),
-    path('create-team/', views.TeamView.as_view()),
-
+    re_path(r'team/(?P<id>\d+)/', views.TeamView.as_view(), name='team-detail'),
+    path('teams/', views.TeamsView.as_view()),
 ]
