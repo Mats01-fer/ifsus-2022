@@ -14,7 +14,15 @@
     <title>F1</title>
 </head>
 <body>
-    <header class="header"><h1>Formula 1</h1></header>
+    <header class="header">
+        <h1 class="main-title">Formula 1</h1>
+        <h1 class="sub-title">{{title}}</h1>
+        <nav class="nav-container">
+            <a class="nav-item" href="/races">Races</a>
+            <a class="nav-item" href="/constructors">Constructors</a>
+            <a class="nav-item" href="/drivers">Drivers</a>
+        </nav>
+    </header>
     <div class="container">
         {% block content %}
         {% endblock content %}
