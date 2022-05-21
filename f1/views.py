@@ -6,6 +6,35 @@ from f1.models import Complaint, Driver, PointsUpdate, Race, Team
 from .serializers import ComplaintSerializer, DriverSerializer, PointsUpdateSerializer, RaceSerializer, TeamSerializer, UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.views.generic import View
+from django.shortcuts import render
+
+
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .models import Team
+from django.forms import ModelForm
+from .forms import TeamForm
+class TeamCreateView(CreateView):
+    model = Team
+    fields = ['name']
+
+class TeamUpdateView(UpdateView):
+    model = Team
+    fields = ['name']
+
+class TeamDeleteView(DeleteView):
+    model = Team
+    success_url = '/teams'
+
+class TeamView(View):
+    template_name = 'team_form.html'
+    
+    form = TeamForm()
+
+    def get(self, request, *args, **kwargs):
+        return render(request,template_name=self.template_name, context={'title': "test", "form": self.form})
+    
 
 class IsFIAPermission(permissions.BasePermission):
     """

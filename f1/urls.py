@@ -50,5 +50,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', token_views.obtain_auth_token),
     path('get-user/', views.GetUserView.as_view()),
+    path('create-team/', views.TeamView.as_view()),
 
 ]
