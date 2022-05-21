@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for team in teams_data %}
+<div style="display: flex; justify-content: space-evenly">
+  <h1>{{team.position}}</h1>
+  <h3>
+    <a href="/team/{{team.team.id}}">
+      {{team.team.name}}</h3>
+  </a>
+  <h3>{{team.team.points}}</h3>
+</div>
+{% for driver in team.drivers %}
+<div style="display: flex; justify-content: space-evenly">
+
+  <h3>{{driver.number}} {{driver.name}} {{driver.last_name}}</h3>
+  <h3>{{driver.points}}</h3>
+</div>
+
+{% endfor %}
+
+
+{% endfor %}
+{% endblock content %}

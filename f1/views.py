@@ -35,7 +35,7 @@ class TeamDeleteView(DeleteView):
 class TeamView(View):
     template_name = 'team_form.html'
     form = TeamForm()
-    DriverFormSet = modelformset_factory(Driver, form=DriverForm, extra=1)
+    DriverFormSet = modelformset_factory(Driver, form=DriverForm, extra=1, can_delete=True)
 
     def get(self, request, id, *args, **kwargs):
         queryset = Driver.objects.filter(team=id)
@@ -155,3 +155,21 @@ class TeamDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class ConstructorsView(View):
+    
+    def get(self, request, *args, **kwargs):
+        teams_data = []
+        teams = Team.objects.all().order_by('points')
+        pos = 1
+        for team in teams:
+            drivers = Driver.objects.filter(team=team)
+            
+            teams_data.append({
+                'team': team,
+                'drivers': drivers,
+                'position': pos
+            })
+            pos += 1
+        return render(request, 'constructors.html', context={'teams_data': teams_data})

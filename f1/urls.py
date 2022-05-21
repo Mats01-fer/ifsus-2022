@@ -52,4 +52,5 @@ urlpatterns = [
     path('get-user/', views.GetUserView.as_view()),
     re_path(r'team/(?P<id>\d+)/', views.TeamView.as_view(), name='team-detail'),
     path('teams/', views.TeamsView.as_view()),
+    path('constructors/', views.ConstructorsView.as_view()),
 ]
