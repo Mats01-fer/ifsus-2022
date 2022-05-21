@@ -16,7 +16,7 @@ from django.views.generic.detail import DetailView
 
 from .models import Team
 from django.forms import ModelForm, modelformset_factory
-from .forms import TeamForm, DriverForm
+from .forms import TeamForm, DriverForm, AssingPointsForm
 
 
 
@@ -173,3 +173,11 @@ class ConstructorsView(View):
             })
             pos += 1
         return render(request, 'constructors.html', context={'teams_data': teams_data})
+    
+    
+    
+
+class RacePointScoringView(View):
+    def get(self, request, id, *args, **kwargs):
+        form = AssingPointsForm()
+        return render(request, 'race.html', context={'form': form})
