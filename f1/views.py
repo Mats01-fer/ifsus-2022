@@ -17,6 +17,7 @@ from django.views.generic.detail import DetailView
 from .models import Team
 from django.forms import ModelForm, modelformset_factory
 from .forms import TeamForm, DriverForm, AssingPointsForm
+from django.http import HttpResponseRedirect
 
 
 
@@ -181,3 +182,11 @@ class RacePointScoringView(View):
     def get(self, request, id, *args, **kwargs):
         form = AssingPointsForm()
         return render(request, 'race.html', context={'form': form})
+    
+    def post(self, request, id, *args, **kwargs):
+        form = AssingPointsForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/constructors/')
+        else:   
+            return render(request, 'race.html', context={'form': form})
+            
