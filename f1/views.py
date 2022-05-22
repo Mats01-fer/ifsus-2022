@@ -163,15 +163,21 @@ class ConstructorsView(View):
     def get(self, request, *args, **kwargs):
         teams_data = []
         teams = Team.objects.all().order_by('points')
-        pos = 1
         for team in teams:
             drivers = Driver.objects.filter(team=team)
             
             teams_data.append({
                 'team': team,
+                'points': sum([driver.points for driver in drivers]),
                 'drivers': drivers,
-                'position': pos
+                'position': 0
             })
+
+
+        teams_data = sorted(teams_data, key = lambda i: i['points'], reverse=True)
+        pos = 1
+        for team in teams_data:
+            team['position'] = pos
             pos += 1
         return render(request, 'constructors.html', context={'teams_data': teams_data})
     
@@ -184,8 +190,19 @@ class RacePointScoringView(View):
         return render(request, 'race.html', context={'form': form})
     
     def post(self, request, id, *args, **kwargs):
+        race = Race.objects.filter(id=id).first()
         form = AssingPointsForm(request.POST)
         if form.is_valid():
+            scoring = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+            for score in scoring:
+                driver = form.cleaned_data['points_%s'%score]
+                driver = Driver.objects.filter(number=driver).first()
+                driver.points += score
+                driver.save()
+                p = PointsUpdate(driver=driver, points=score,race=race, FIA_officer=request.user, descirption='Race points')
+                
+                p.save()
+           
             return HttpResponseRedirect('/constructors/')
         else:   
             return render(request, 'race.html', context={'form': form})
