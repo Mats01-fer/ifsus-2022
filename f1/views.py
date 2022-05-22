@@ -34,15 +34,17 @@ class TeamDeleteView(DeleteView):
     success_url = '/teams'
 
 class TeamView(View):
+
     template_name = 'team_form.html'
     form = TeamForm()
     DriverFormSet = modelformset_factory(Driver, form=DriverForm, extra=1, can_delete=True)
 
     def get(self, request, id, *args, **kwargs):
         queryset = Driver.objects.filter(team=id)
-        
         formset = self.DriverFormSet(queryset=queryset)
-        return render(request,template_name=self.template_name, context={'title': "test", "form": self.form, "formset": formset})
+        team = Team.objects.filter(id=id)[0]
+
+        return render(request,template_name=self.template_name, context={'title': team.name, "form": self.form, "formset": formset, 'team': team })
     
 
 class IsFIAPermission(permissions.BasePermission):
@@ -152,7 +154,7 @@ class RacesView(View):
     
     def get(self, request, *args, **kwargs):
         races = Race.objects.all()
-        return render(request, 'races.html', context={'races': races})
+        return render(request, 'races.html', context={'races': races, 'title': 'Races'})
     
 
 class TeamDetailView(DetailView):
@@ -185,11 +187,27 @@ class ConstructorsView(View):
         for team in teams_data:
             team['position'] = pos
             pos += 1
-        return render(request, 'constructors.html', context={'teams_data': teams_data})
-    
-    
-    
+        return render(request, 'constructors.html', context={'teams_data': teams_data, 'title': 'Constructors'})
 
+class DriversView(View):
+    def get(self, request, *args, **kwargs):
+        drivers = Driver.objects.all().order_by('points')
+
+        drivers_with_points = [];
+        pos = 1
+        for driver in drivers:
+            drivers_with_points.append({
+                'name': driver.name,
+                'last_name': driver.last_name,
+                'team': driver.team,
+                'number': driver.number,
+                'points': driver.points,
+                'pos': pos,
+            })
+            pos += 1
+
+        return render(request, 'drivers.html', context={'drivers': drivers_with_points, 'title': 'Drivers'})
+ 
 class RacePointScoringView(View):
     def get(self, request, id, *args, **kwargs):
         race = Race.objects.filter(id=id).first()
@@ -213,5 +231,6 @@ class RacePointScoringView(View):
            
             return HttpResponseRedirect('/constructors/')
         else:   
-            return render(request, 'race.html', context={'form': form})
+            return render(request, 'race.html', context={'form': form, 'title': race.name + ' Results'})
+
             

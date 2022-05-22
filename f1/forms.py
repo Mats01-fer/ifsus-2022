@@ -23,16 +23,16 @@ drivers = Driver.objects.all()
 
 
 class AssingPointsForm(Form):
-    points_25 = CharField(label='25', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_18 = CharField(label='18', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_15 = CharField(label='15', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_12 = CharField(label='12', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_10 = CharField(label='10', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_8 = CharField(label='8', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_6 = CharField(label='6', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_4 = CharField(label='4', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_2 = CharField(label='2', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
-    points_1 = CharField(label='1', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_25 = CharField(label='1st (25 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_18 = CharField(label='2nd (18 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_15 = CharField(label='3rd (15 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_12 = CharField(label='4th (12 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_10 = CharField(label='5th (10 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_8 = CharField(label='6th (8 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_6 = CharField(label='7th (6 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_4 = CharField(label='8th (4 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_2 = CharField(label='9th (2 points)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
+    points_1 = CharField(label='10th (1 point)', widget=Select(choices=[(driver.number, "%d %s %s" % (driver.number, driver.name, driver.last_name)) for driver in drivers]))
     
     
     def clean(self):

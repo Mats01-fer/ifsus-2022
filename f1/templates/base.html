@@ -18,12 +18,12 @@
         <h1 class="main-title">Formula 1</h1>
         <h1 class="sub-title">{{title}}</h1>
         <nav class="nav-container">
-            <a class="nav-item" href="/races">Races</a>
-            <a class="nav-item" href="/constructors">Constructors</a>
-            <a class="nav-item" href="/drivers">Drivers</a>
+            <a class="nav-item clickable" href="/races">Races</a>
+            <a class="nav-item clickable" href="/constructors">Constructors</a>
+            <a class="nav-item clickable" href="/drivers">Drivers</a>
         </nav>
     </header>
-    <div class="container">
+    <div class="page-content">
         {% block content %}
         {% endblock content %}
     </div>

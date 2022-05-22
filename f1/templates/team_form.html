@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{title}}</h1>
-<div>
+<div class="constructor-page-wrapper">
   <form method="post">
     {{ formset.management_form }}
     {% for form in formset %}
-    <ul style="display: flex; justify-content: space-evenly">
+    <ul class="constructor-driver-form">
       {{form}}
     </ul>
     {% endfor %}

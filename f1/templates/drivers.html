@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="drivers-page-wrapper">
+    <div class="driver-grid">
+        <div class="column-header">Pos</div>
+        <div class="column-header">Name</div>
+        <div class="column-header">Number</div>
+        <div class="column-header">Team</div>
+        <div class="column-header">Points</div>
+    {% for driver in drivers %}    
+            <div class="driver-pos">{{driver.pos}}</div>
+            <div class="driver-name">{{driver.name}} {{driver.last_name}}</div>
+            <div class="driver-number">{{driver.number}}</div>
+            <a class="driver-team-name clickable" href="/admin/f1/team/{{driver.team.id}}/change/">{{driver.team.name}}</a>
+            <div class="driver-points">{{driver.points}}</div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}

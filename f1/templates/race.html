@@ -2,16 +2,14 @@
 
 {% block content %}
 
-<div>
-  <h1>{{race.name}}</h1>
+<div class="race-points-page-wrapper">
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    {{ form.non_field_errors }}
-    <input type="submit" value="Spremi">
+    <div class="race-points-form">
+      {{ form.as_p }}
+    </div>
+    <input type="submit" value="Save">
   </form>
-
-
 </div>
 
 {% endblock content %}
