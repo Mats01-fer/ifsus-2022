@@ -56,4 +56,6 @@ urlpatterns = [
     path('constructors/', views.ConstructorsView.as_view()),
     path('drivers/', views.DriversView.as_view()),
     re_path(r'race-points/(?P<id>\d+)/', views.RacePointScoringView.as_view()),
+    path('', views.ConstructorsView.as_view()),
+    
 ]

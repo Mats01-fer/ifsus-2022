@@ -2,12 +2,18 @@
 
 {% block content %}
 <div class="races-page-wrapper">
+  <form action="/races" method="get">
+    <input name="q" type="text" placeholder="Pretrazi...">
+  </form>
+</div>
+<div class="races-page-wrapper">
+
   <div class="races-grid">
     <div class="column-header">Name</div>
     <div class="column-header"></div>
     {% for race in races %}
-      <div class="race-name">{{race.name}}</div>
-      <a class="clickable" href="/race-points/{{race.id}}">Results</a>
+    <div class="race-name">{{race.name}}</div>
+    <a class="clickable" href="/race-points/{{race.id}}">Results</a>
     {% endfor %}
   </div>
 </div>

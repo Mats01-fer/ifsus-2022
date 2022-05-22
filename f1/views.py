@@ -153,8 +153,16 @@ class TeamsView(View):
 class RacesView(View):
     
     def get(self, request, *args, **kwargs):
+        query = self.request.GET.get("q")
         races = Race.objects.all()
-        return render(request, 'races.html', context={'races': races, 'title': 'Races'})
+        filtered = []
+        if query:
+            for race in races:
+                if query in race.name.lower():
+                    filtered.append(race)
+        else:
+            filtered = races
+        return render(request, 'races.html', context={'races': filtered, 'title': 'Races'})
     
 
 class TeamDetailView(DetailView):
