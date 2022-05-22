@@ -148,6 +148,12 @@ class TeamsView(View):
         teams = Team.objects.all()
         return render(request, 'teams.html', context={'teams': teams})
     
+class RacesView(View):
+    
+    def get(self, request, *args, **kwargs):
+        races = Race.objects.all()
+        return render(request, 'races.html', context={'races': races})
+    
 
 class TeamDetailView(DetailView):
   
@@ -186,8 +192,10 @@ class ConstructorsView(View):
 
 class RacePointScoringView(View):
     def get(self, request, id, *args, **kwargs):
+        race = Race.objects.filter(id=id).first()
+    
         form = AssingPointsForm()
-        return render(request, 'race.html', context={'form': form})
+        return render(request, 'race.html', context={'form': form, 'race': race})
     
     def post(self, request, id, *args, **kwargs):
         race = Race.objects.filter(id=id).first()

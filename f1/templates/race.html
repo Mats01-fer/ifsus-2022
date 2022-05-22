@@ -3,6 +3,7 @@
 {% block content %}
 
 <div>
+  <h1>{{race.name}}</h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for team in races %}
+<div>
+  {{team}}
+  <a href="/race-points/{{team.id}}">Dodaj bodove za ovu utrku</a>
+</div>
+{% endfor %}
+{% endblock %}
