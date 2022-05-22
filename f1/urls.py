@@ -16,19 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from rest_framework_nested import routers
+
 # from rest_framework import routers
 from rest_framework.authtoken import views as token_views
 
 from . import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'complaints', views.ComplaintViewSet)
-router.register(r'teams', views.TeamViewSet)
-router.register(r'drivers', views.DriverViewSet)
-router.register(r'pointsupdates', views.PointsUpdateViewSet)
-router.register(r'races', views.RaceViewSet)
+router.register(r"users", views.UserViewSet)
+router.register(r"groups", views.GroupViewSet)
+router.register(r"complaints", views.ComplaintViewSet)
+router.register(r"teams", views.TeamViewSet)
+router.register(r"drivers", views.DriverViewSet)
+router.register(r"pointsupdates", views.PointsUpdateViewSet)
+router.register(r"races", views.RaceViewSet)
 
 
 # tweet_router = routers.NestedSimpleRouter(
@@ -40,22 +41,21 @@ router.register(r'races', views.RaceViewSet)
 #     views.TweetViewSet,
 #     basename='user-tweet'
 # )
-app_name = ''
+app_name = ""
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     # path('', include(router.urls)),
     # path('', include(tweet_router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', token_views.obtain_auth_token),
-    path('get-user/', views.GetUserView.as_view()),
-    re_path(r'team/(?P<id>\d+)/', views.TeamView.as_view(), name='team-detail'),
-    path('teams/', views.TeamsView.as_view()),
-    path('', views.RacesView.as_view()),
-    path('constructors/', views.ConstructorsView.as_view()),
-    path('drivers/', views.DriversView.as_view()),
-    re_path(r'race-points/(?P<id>\d+)/', views.RacePointScoringView.as_view()),
-    path('', views.ConstructorsView.as_view()),
-    
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api-token-auth/", token_views.obtain_auth_token),
+    path("get-user/", views.GetUserView.as_view()),
+    re_path(r"team/(?P<id>\d+)/", views.TeamView.as_view(), name="team-detail"),
+    path("teams/", views.TeamsView.as_view()),
+    path("", views.RacesView.as_view(), name="races"),
+    path("constructors/", views.ConstructorsView.as_view(), name="constructors"),
+    path("drivers/", views.DriversView.as_view(), name="drivers"),
+    re_path(r"race-points/(?P<id>\d+)/", views.RacePointScoringView.as_view()),
+    path("", views.ConstructorsView.as_view()),
 ]

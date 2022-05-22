@@ -11,7 +11,7 @@
         <div class="column-header">Points</div>
     {% for driver in drivers %}    
             <div class="driver-pos">{{driver.pos}}</div>
-            <div class="driver-name">{{driver.name}} {{driver.last_name}}</div>
+            <a class="driver-name clickable" href="/admin/f1/driver/{{driver.number}}/change/" >{{driver.name}} {{driver.last_name}}</a>
             <div class="driver-number">{{driver.number}}</div>
             <a class="driver-team-name clickable" href="/admin/f1/team/{{driver.team.id}}/change/">{{driver.team.name}}</a>
             <div class="driver-points">{{driver.points}}</div>
