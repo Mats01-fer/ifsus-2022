@@ -10,9 +10,11 @@
 
   <div class="races-grid">
     <div class="column-header">Name</div>
+    <div class="column-header">Date</div>
     <div class="column-header"></div>
     {% for race in races %}
     <div class="race-name">{{race.name}}</div>
+    <div>{{race.date}}</div>
     <a class="clickable" href="/race-points/{{race.id}}">Results</a>
     {% endfor %}
   </div>

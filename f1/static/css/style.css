@@ -147,7 +147,7 @@ a.clickable {
 
 .races-grid{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     margin: auto;
     gap: var(--space-xs) var(--space-m);
 }
