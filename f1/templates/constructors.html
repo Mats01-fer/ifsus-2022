@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="constructors-page-wrapper">
   {% for team in teams_data %}
   <div class="constructor-wrapper">
@@ -11,19 +9,22 @@
           {{team.team.name}}
         </a>
       </h2>
-      <h3 class="constructor-points">{{team.team.points}} Points</h3>
+      <h3 class="constructor-points">{{team.points}} Points</h3>
     </div>
     <div class="constructor-drivers">
       {% for driver in team.drivers %}
-        <div class="constructor-driver">
-          <h3 class="constructor-driver-number">{{driver.number}} </h3>
-          <h3 class="constructor-driver-name">
-            <a class="clickable" href="/admin/f1/driver/{{driver.number}}/change/">
-              {{driver.name}} {{driver.last_name}}
-            </a>
-          </h3>
-          <h3 class="constructor-driver-points">{{driver.points}} Points</h3>
-        </div>
+      <div class="constructor-driver">
+        <h3 class="constructor-driver-number">{{driver.number}}</h3>
+        <h3 class="constructor-driver-name">
+          <a
+            class="clickable"
+            href="/admin/f1/driver/{{driver.number}}/change/"
+          >
+            {{driver.name}} {{driver.last_name}}
+          </a>
+        </h3>
+        <h3 class="constructor-driver-points">{{driver.points}} Points</h3>
+      </div>
       {% endfor %}
     </div>
   </div>
